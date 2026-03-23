@@ -1,0 +1,48 @@
+package com.loja.api.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
+@Entity
+@Table(name = "pedidos")
+public class Pedido {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull(message = "Cliente é obrigatório")
+    @Column(nullable = false)
+    private Long clienteId;
+
+    @NotNull(message = "Produto é obrigatório")
+    @Column(nullable = false)
+    private Long produtoId;
+
+    @NotNull(message = "Quantidade é obrigatória")
+    @Min(value = 1, message = "Quantidade deve ser pelo menos 1")
+    @Column(nullable = false)
+    private Integer quantidade;
+
+    // Construtores
+    public Pedido() {}
+
+    public Pedido(Long clienteId, Long produtoId, Integer quantidade) {
+        this.clienteId = clienteId;
+        this.produtoId = produtoId;
+        this.quantidade = quantidade;
+    }
+
+    // Getters e Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getClienteId() { return clienteId; }
+    public void setClienteId(Long clienteId) { this.clienteId = clienteId; }
+
+    public Long getProdutoId() { return produtoId; }
+    public void setProdutoId(Long produtoId) { this.produtoId = produtoId; }
+
+    public Integer getQuantidade() { return quantidade; }
+    public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
+}
